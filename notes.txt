@@ -1,1 +1,7 @@
 go mod tidy
+goimports -w .
+
+go get package_name
+
+
+go run main.go
