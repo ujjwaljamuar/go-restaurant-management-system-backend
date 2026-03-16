@@ -5,7 +5,7 @@ import (
 	controller "restaurant-management-system/controllers"
 )
 
-func foodRoutes (incomingRoutes *gin.Engine) {
+func FoodRoutes (incomingRoutes *gin.Engine) {
 	incomingRoutes.GET("/foods", controller.getFoods())
 	incomingRoutes.GET("/foods/:food_id", controller.getFood())
 	incomingRoutes.POST("/foods", controller.createFood())
