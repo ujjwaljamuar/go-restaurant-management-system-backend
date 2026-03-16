@@ -2,16 +2,17 @@ package main
 
 import (
 	"os"
-	"github.com/gin-gonic/gin"
 	"restaurant-management-system/database"
-	routes "restaurant-management-system/routes"
 	"restaurant-management-system/middlewares"
+	routes "restaurant-management-system/routes"
+
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var foodCollection *mongo.Collection = database.OpenCollection(database.Client, "food")
 
-func main ()  {
+func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {

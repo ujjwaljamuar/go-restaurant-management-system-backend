@@ -1,8 +1,9 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
 	controller "restaurant-management-system/controllers"
+
+	"github.com/gin-gonic/gin"
 )
 
 func OrderRoutes(incomingRoutes *gin.Engine) {
