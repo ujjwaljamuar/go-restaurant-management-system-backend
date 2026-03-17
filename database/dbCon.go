@@ -2,19 +2,27 @@ package database
 
 import (
 	"context"
-	"fmt"
 	"log"
-	"time"
 	"os"
+	"time"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func DbInstance() *mongo.Client {
-	MongoDb := os.Getenv("MONGO_URI")
+	MongoDbURI := os.Getenv("MONGO_URI")
+	if MongoDbURI == "" {
+		_ = godotenv.Load()
+		MongoDbURI = os.Getenv("MONGO_URI")
+	}
 
-	client, err := mongo.NewClient(options.Client().ApplyURI(MongoDb))
+	if MongoDbURI == "" {
+		log.Fatal("MONGO_URI is not set")
+	}
+
+	client, err := mongo.NewClient(options.Client().ApplyURI(MongoDbURI))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -26,11 +34,11 @@ func DbInstance() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connected to MongoDB.")
+	log.Println("Connected to MongoDB.")
 	return client
 }
 
-var client *mongo.Client = DbInstance()
+var Client *mongo.Client = DbInstance()
 
 func OpenCollection(client *mongo.Client, collectionName string) *mongo.Collection {
 	var collection *mongo.Collection = client.Database("go-restaurant").Collection(collectionName)
