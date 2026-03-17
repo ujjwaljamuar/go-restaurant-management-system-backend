@@ -1,12 +1,14 @@
 package routes
 
 import (
+	"restaurant-management-system/controllers"
+
 	"github.com/gin-gonic/gin"
 )
 
 func FoodRoutes(incomingRoutes *gin.Engine) {
-	incomingRoutes.GET("/foods", controller.getFoods())
-	incomingRoutes.GET("/foods/:food_id", controller.getFood())
-	incomingRoutes.POST("/foods", controller.createFood())
-	incomingRoutes.PATCH("/foods/:food_id", controller.updateFood())
+	incomingRoutes.GET("/foods", controllers.GetFoods())
+	incomingRoutes.GET("/foods/:food_id", controllers.GetFood())
+	incomingRoutes.POST("/foods", controllers.CreateFood())
+	incomingRoutes.PATCH("/foods/:food_id", controllers.UpdateFood())
 }
